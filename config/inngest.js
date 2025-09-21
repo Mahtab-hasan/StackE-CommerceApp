@@ -7,7 +7,7 @@ import User from "@/models/User";
 export const inngest = new Inngest({ id: "quickcart-next" });
 
 //innest functions to save user data to a database
-export const syncUserCreation = Inngest.createfunction(
+export const syncUserCreation = inngest.createFunction(
   { id: "sync-user-form-clerk" },
   { event: "clerk/user.created" },
   async ({ event }) => {
@@ -25,7 +25,7 @@ export const syncUserCreation = Inngest.createfunction(
 )
 
 // Inngest function to update user data from database
-export const syncUserUpdation = Inngest.createfunction(
+export const syncUserUpdation = inngest.createFunction(
   { id: "update-user-update-clerk" },
   { event: "clerk/user.updated" },
   async ({ event }) => {
@@ -43,7 +43,7 @@ export const syncUserUpdation = Inngest.createfunction(
 )
 
 // Inngest function to delete user data from database  
-export const syncUserDeletion = Inngest.createfunction(
+export const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-from-clerk" },
   { event: "clerk/user.deleted" },  
     async ({ event }) => {
