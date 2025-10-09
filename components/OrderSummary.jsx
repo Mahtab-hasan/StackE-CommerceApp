@@ -38,12 +38,6 @@ const OrderSummary = () => {
   };
 
 
-
-// eikhane jhamela hoitase maybe order place hoitase na 
-
-
-
-
   const createOrder = async () => {
     try {
       if (!selectedAddress) {
