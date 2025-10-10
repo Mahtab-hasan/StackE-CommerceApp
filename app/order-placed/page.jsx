@@ -25,4 +25,4 @@ const OrderPlaced = () => {
   )
 }
 
-export default OrderPlaced
+export default OrderPlaced;
