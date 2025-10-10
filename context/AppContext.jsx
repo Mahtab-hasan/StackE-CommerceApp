@@ -59,6 +59,11 @@ export const AppContextProvider = (props) => {
 
     const addToCart = async (itemId) => {
 
+        if (!user) {
+            toast.error("Create an account");
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
         if (cartData[itemId]) {
             cartData[itemId] += 1;
@@ -70,7 +75,7 @@ export const AppContextProvider = (props) => {
         if (user) {
             try {
                 const token = await getToken()
-                await axios.post('/api/cart/update', { cartData }, { headers: { Authorization: `Bearer ${token}` }})
+                await axios.post('/api/cart/update', { cartData }, { headers: { Authorization: `Bearer ${token}` } })
                 toast.success('Item added to cart')
             } catch (error) {
                 toast.error(error.message)
@@ -81,6 +86,10 @@ export const AppContextProvider = (props) => {
 
     const updateCartQuantity = async (itemId, quantity) => {
 
+        if (!user) {
+            toast.error("Create an account");
+            return;
+        }
         let cartData = structuredClone(cartItems);
         if (quantity === 0) {
             delete cartData[itemId];
@@ -91,7 +100,7 @@ export const AppContextProvider = (props) => {
         if (user) {
             try {
                 const token = await getToken()
-                await axios.post('/api/cart/update', { cartData }, { headers: { Authorization: `Bearer ${token}` }})
+                await axios.post('/api/cart/update', { cartData }, { headers: { Authorization: `Bearer ${token}` } })
                 toast.success('cart updated')
             } catch (error) {
                 toast.error(error.message)

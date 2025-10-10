@@ -5,10 +5,10 @@ import User from "@/models/User";
 
 export async function GET(request) {
   try {
-    const { userId } = getAuth(request);
+    const { userId } = getAuth(request)
     
-    await connectDB();
-    const user = await User.findOne({ _id: userId });
+    await connectDB()
+    const user = await User.findById({ userId })
 
     const { cartItems } = user
 
