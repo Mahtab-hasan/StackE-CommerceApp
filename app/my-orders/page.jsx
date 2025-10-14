@@ -48,7 +48,7 @@ const MyOrders = () => {
         <>
             <Navbar />
             <div className="flex flex-col justify-between px-6 md:px-16 lg:px-32 py-6 min-h-screen">
-                <div className="space-y-7">
+                <div className="space-y-7 md:mx-auto ">
                     <h2 className="text-lg font-medium mt-6">My Orders</h2>
                     {loading ? <Loading /> : (<div className="md:max-w-6xl   border-t border-gray-300 text-sm">
                         {orders.map((order, index) => (
