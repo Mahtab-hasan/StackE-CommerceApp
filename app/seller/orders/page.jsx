@@ -36,7 +36,7 @@ const Orders = () => {
     useEffect(() => {
         if (user) {
             fetchSellerOrders()
-        }        
+        }
     }, [user]);
 
     return (
@@ -52,11 +52,14 @@ const Orders = () => {
                                     src={assets.box_icon}
                                     alt="box_icon"
                                 />
-                                <p className="flex flex-col gap-3">
+                                <p className="flex flex-col gap-1 max-w-60">
                                     <span className="font-medium">
-                                        {order.items.map((item) => item.product.name + ` x ${item.quantity}`).join(", ")}
+                                        {order.items
+                                            .filter((item) => item.product) // Filter out items with null product
+                                            .map((item) => item.product.name + ` x ${item.quantity}`)
+                                            .join(", ")}
                                     </span>
-                                    <span>Items : {order.items.length}</span>
+                                    <span>Items: {order.items.length}</span>
                                 </p>
                             </div>
                             <div>
