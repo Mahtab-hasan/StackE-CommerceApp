@@ -10,7 +10,7 @@ export async function POST(request) {
     const { userId } = getAuth(request);
 
     if (!userId) {
-        return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ success: false, message: "Unauthorized" });
     }
 
     let user = await User.findById(userId);
@@ -18,7 +18,7 @@ export async function POST(request) {
     if (!user) {
       const clerkUser = await currentUser();
       if (!clerkUser) {
-        return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ success: false, message: "Unauthorized" });
       }
 
       // Check if a user with the same email already exists
@@ -50,6 +50,6 @@ export async function POST(request) {
 
   } catch (error) {
     console.error("Cart update error:", error);
-    return NextResponse.json({ success: false, message: "An error occurred while updating the cart." }, { status: 500 });
+    return NextResponse.json({ success: false, message: "An error occurred while updating the cart." });
   }
 }

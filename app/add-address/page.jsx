@@ -16,14 +16,36 @@ const AddAddress = () => {
     const [address, setAddress] = useState({
         fullName: '',
         phoneNumber: '',
-        pincode: '',
         area: '',
         city: '',
         state: '',
     })
 
+    const handleNameChange = (e) => {
+        const value = e.target.value.replace(/[0-9]/g, '');
+        setAddress({ ...address, fullName: value });
+    };
+
+    const handlePhoneChange = (e) => {
+        const value = e.target.value.replace(/[^0-9]/g, '');
+        setAddress({ ...address, phoneNumber: value });
+    };
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+
+        // Client-side required field validation
+        const missing = [];
+        if (!address.fullName.trim()) missing.push('Full name');
+        if (!address.phoneNumber.trim()) missing.push('Phone number');
+        if (!address.area.trim()) missing.push('Address (area/street)');
+        if (!address.city.trim()) missing.push('City/District/Town');
+        if (!address.state.trim()) missing.push('State');
+
+        if (missing.length) {
+            toast.error(`Please fill: ${missing.join(', ')}`);
+            return;
+        }
 
         try {
             const token = await getToken()
@@ -69,18 +91,12 @@ const AddAddress = () => {
                             onChange={(e) => setAddress({ ...address, phoneNumber: e.target.value })}
                             value={address.phoneNumber}
                         />
-                        <input
-                            className="px-2 py-2.5 focus:border-gray-950 transition border border-gray-500/30 rounded outline-none w-full text-[#105223]"
-                            type="text"
-                            placeholder="Pin code"
-                            onChange={(e) => setAddress({ ...address, pincode: e.target.value })}
-                            value={address.pincode}
-                        />
                         <textarea
                             className="px-2 py-2.5 focus:border-gray-950 transition border border-gray-500/30 rounded outline-none w-full text-[#105223] resize-none"
                             type="text"
                             rows={4}
                             placeholder="Address (Area and Street)"
+                            required
                             onChange={(e) => setAddress({ ...address, area: e.target.value })}
                             value={address.area}
                         ></textarea>
@@ -89,13 +105,15 @@ const AddAddress = () => {
                                 className="px-2 py-2.5 focus:border-gray-950 transition border border-gray-500/30 rounded outline-none w-full text-[#105223]"
                                 type="text"
                                 placeholder="City/District/Town"
+                                required
                                 onChange={(e) => setAddress({ ...address, city: e.target.value })}
                                 value={address.city}
                             />
                             <input
                                 className="px-2 py-2.5 focus:border-gray-950 transition border border-gray-500/30 rounded outline-none w-full text-[#105223]"
                                 type="text"
-                                placeholder="State"
+                                placeholder="Area"
+                                required
                                 onChange={(e) => setAddress({ ...address, state: e.target.value })}
                                 value={address.state}
                             />

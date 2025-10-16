@@ -8,8 +8,7 @@ export async function GET(request) {
     const { userId } = getAuth(request);
     if (!userId) {
       return NextResponse.json(
-        { success: false, message: "Unauthorized" },
-        { status: 401 }
+        { success: false, message: "Please log in to access your data." }
       );
     }
 
@@ -22,8 +21,7 @@ export async function GET(request) {
       const cu = await currentUser();
       if (!cu) {
         return NextResponse.json(
-          { success: false, message: "Unauthorized" },
-          { status: 401 }
+          { success: false, message: "Please log in to access your data." }
         );
       }
 
@@ -50,8 +48,7 @@ export async function GET(request) {
     return NextResponse.json({ success: true, user });
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: error.message },
-      { status: 500 }
+      { success: false, message: "Error fetching user data. Please try again later." }
     );
   }
 }

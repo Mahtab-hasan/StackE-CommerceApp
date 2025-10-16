@@ -10,12 +10,12 @@ export async function GET(request) {
         await connectDB()
         const addresses = await Address.find({ userId })
         return NextResponse.json({success:true,  addresses});
-        
-        
-        
-        
+
+
+
+
     } catch (error) {
-        return NextResponse.json({success:false, message:error.message},{status:500});
-        
+        return NextResponse.json({success:false, message:"Error fetching addresses. Please try again later."});
+
     }
 }

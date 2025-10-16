@@ -14,7 +14,7 @@ export async function GET(request) {
         const isSeller = await authSeller(userId)
 
         if (!isSeller) {
-            return NextResponse.json({ success: false, message: "Not Authorized" }, { status: 401 });
+            return NextResponse.json({ success: false, message: "Not Authorized" });
         }  
 
         await connectDB()
@@ -25,6 +25,6 @@ export async function GET(request) {
 
     }
     catch (error) {
-        return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+        return NextResponse.json({ success: false, message: "Error fetching seller orders. Please try again later." });
     }
 }

@@ -149,8 +149,12 @@ const OrderSummary = () => {
             <p className="text-gray-800">{currency}{getCartAmount()}</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-gray-600">Shipping Fee</p>
-            <p className="font-medium text-gray-800">Free</p>
+            <p className="text-gray-600">Shipping Fee inside Dhaka</p>
+            <p className="font-medium text-gray-800">$80</p>
+          </div>
+          <div className="flex justify-between">
+            <p className="text-gray-600">Shipping Outside Dhaka</p>
+            <p className="font-medium text-gray-800">$130</p>
           </div>
           <div className="flex justify-between">
             <p className="text-gray-600">Tax (2%)</p>

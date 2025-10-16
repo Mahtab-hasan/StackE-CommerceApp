@@ -17,7 +17,7 @@ export async function POST(request) {
         const { userId } = getAuth(request)
         const isSeller = await authSeller(userId)
         if (!isSeller) {
-            return NextResponse.json({ success: false, message: 'Not Authorized' }, { status: 401 })
+            return NextResponse.json({ success: false, message: 'Not Authorized' })
 
         }
         const formData = await request.formData();
@@ -30,7 +30,7 @@ export async function POST(request) {
         const files = formData.getAll('images');
 
         if (!files || files.length === 0) {
-            return NextResponse.json({ success: false, message: 'No Files Uploaded' }, { status: 400 })
+            return NextResponse.json({ success: false, message: 'Please upload at least one image for the product.' })
         }
         const result = await Promise.all(
             files.map(async (file) => {
@@ -70,6 +70,6 @@ export async function POST(request) {
         
 
     } catch (error) {
-        return NextResponse.json({ success: false, message: error.message }, { status: 500 })
+        return NextResponse.json({ success: false, message: "Error adding product. Please try again later." })
     }
 }

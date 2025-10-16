@@ -10,7 +10,7 @@ import Address from "@/models/Address";
 export async function GET(request) {
     try {
         const { userId } = getAuth(request);
-        
+             
         await connectDB();
 
         Address.length
@@ -21,6 +21,6 @@ export async function GET(request) {
         return NextResponse.json({ success: true, orders });
 
     } catch (error) {
-        return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+        return NextResponse.json({ success: false, message: "Error fetching orders. Please try again later." });
     }
 }

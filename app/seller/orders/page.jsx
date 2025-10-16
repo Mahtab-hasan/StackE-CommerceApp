@@ -64,13 +64,13 @@ const Orders = () => {
                             </div>
                             <div>
                                 <p>
-                                    <span className="font-medium">{order.address.fullName}</span>
+                                    <span className="font-medium">{order.address?.fullName ?? 'No name'}</span>
                                     <br />
-                                    <span >{order.address.area}</span>
+                                    <span>{order.address?.area ?? 'No address'}</span>
                                     <br />
-                                    <span>{`${order.address.city}, ${order.address.state}`}</span>
+                                    <span>{`${order.address?.city ?? 'Unknown city'}, ${order.address?.state ?? 'Unknown state'}`}</span>
                                     <br />
-                                    <span>{order.address.phoneNumber}</span>
+                                    <span>{order.address?.phoneNumber ?? 'No phone'}</span>
                                 </p>
                             </div>
                             <p className="font-medium my-auto">{currency}{order.amount}</p>
