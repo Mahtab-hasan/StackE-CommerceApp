@@ -2,10 +2,12 @@ import React from 'react'
 import { assets } from '../../assets/assets'
 import Image from 'next/image'
 import { useAppContext } from '@/context/AppContext'
+import { useClerk } from '@clerk/nextjs'
 
 const Navbar = () => {
 
   const { router } = useAppContext()
+  const { signOut } = useClerk()
 
   return (
     <div className='flex items-center px-4 md:px-8 py-3 justify-between border-b'>
@@ -13,6 +15,7 @@ const Navbar = () => {
       <button
         type="button"
         aria-label="Logout"
+        onClick={() => signOut({ redirectUrl: '/' })}
         className={
           'bg-[#267426] text-white px-5 py-2 sm:px-7 sm:py-2 rounded-full text-xs sm:text-sm ' +
           'transform transition duration-200 ease-in-out hover:scale-105 hover:bg-[#325a3e] ' +
